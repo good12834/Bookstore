@@ -1,0 +1,35 @@
+{
+  "name": "online-book-store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node seedBooks.js",
+    "seed:gutendex": "node seedBooksFromGutendexAPI.js",
+    "seed:gutendex:force": "node seedBooksFromGutendexAPI.js --force",
+    "seed:api": "node seedBooksFromAPI.js",
+    "seed:api:force": "node seedBooksFromAPI.js --force",
+    "seed:google": "node seedBooksFromGoogleAPI.js",
+    "seed:google:force": "node seedBooksFromGoogleAPI.js --force"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.1",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.0.2",
+    "mysql2": "^3.16.0",
+    "nodemailer": "^7.0.12",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

@@ -1,0 +1,173 @@
+/* ============================================
+   GLOBAL STYLES — Luxury BookStore
+   Fonts: Playfair Display (headings), DM Sans (body)
+   Palette: Ink (#0d0d0d), Warm White, Amber (#c8893a)
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* ── Brand Colors ── */
+  --ink: #0d0d0d;
+  --parchment: #f5f0e8;
+  --warm-white: #faf8f4;
+  --amber: #c8893a;
+  --amber-light: #e8a84e;
+  --amber-glow: rgba(200, 137, 58, 0.15);
+  --amber-glow-strong: rgba(200, 137, 58, 0.25);
+  --charcoal: #1e1e1e;
+  --muted: #6b6560;
+  --muted-light: #9a9490;
+  --border: rgba(200, 137, 58, 0.18);
+  --border-light: rgba(200, 137, 58, 0.10);
+
+  /* ── Legacy / Aliases ── */
+  --primary-color: var(--amber);
+  --primary-dark: #b07830;
+  --primary-light: var(--amber-light);
+  --secondary-color: var(--ink);
+  --accent-color: var(--amber);
+
+  /* ── Text Colors ── */
+  --text-main: #e2e8f0;
+  --text-secondary: #cbd5e1;
+  --text-light: #94a3b8;
+  --text-white: #ffffff;
+  --text-dark: var(--ink);
+
+  /* ── Background Colors ── */
+  --bg-dark: var(--ink);
+  --bg-white: #ffffff;
+  --bg-glass: rgba(13, 13, 13, 0.95);
+  --bg-glass-hover: rgba(13, 13, 13, 0.8);
+  --bg-card: #1e293b;
+  --bg-warm: var(--warm-white);
+  --bg-parchment: var(--parchment);
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
+  --shadow-amber: 0 4px 20px rgba(200, 137, 58, 0.3);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-warm: 0 8px 40px rgba(0, 0, 0, 0.12);
+  --hover-shadow: 0 16px 48px rgba(0, 0, 0, 0.14);
+
+  /* ── Layout & Spacing ── */
+  --navbar-height: 72px;
+  --navbar-height-scrolled: 60px;
+  --container-max-width: 1280px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* ── Typography ── */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  /* ── Transitions ── */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--warm-white);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  padding-top: var(--navbar-height);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+p {
+  margin-top: 0;
+}
+
+a {
+  color: var(--amber);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--amber-light);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── Selection ── */
+::selection {
+  background: var(--amber);
+  color: white;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--warm-white);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* ── Utility Classes ── */
+.fade-in {
+  animation: fadeIn 0.5s ease both;
+}
+
+.fade-up {
+  animation: fadeUp 0.6s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 992px) {
+  body {
+    padding-top: var(--navbar-height);
+  }
+}

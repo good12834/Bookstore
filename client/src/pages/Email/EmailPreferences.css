@@ -1,0 +1,399 @@
+/* ============================================
+   LUXURY BOOKSTORE — EMAIL PREFERENCES
+   Ink / Parchment / Amber · Playfair + DM Sans
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --ink: #0d0d0d;
+  --parchment: #f5f0e8;
+  --warm-white: #faf8f4;
+  --amber: #c8893a;
+  --amber-light: #e8a84e;
+  --amber-glow: rgba(200, 137, 58, 0.14);
+  --amber-border: rgba(200, 137, 58, 0.22);
+  --muted: #6b6560;
+  --border: #e2dbd0;
+  --shadow: 0 4px 24px rgba(0,0,0,0.07);
+  --shadow-md: 0 12px 40px rgba(0,0,0,0.1);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --c-danger: #dc2626;
+  --c-danger-bg: rgba(220,38,38,0.06);
+  --c-danger-border: rgba(220,38,38,0.2);
+}
+
+/* ── Page ── */
+.ep-page {
+  min-height: 100vh;
+  background: var(--warm-white);
+  font-family: 'DM Sans', sans-serif;
+  padding: 48px 24px 80px;
+}
+
+.ep-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ── Header ── */
+.ep-header {
+  background: var(--ink);
+  border-radius: var(--radius);
+  padding: 40px 44px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ep-header::before {
+  content: '';
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(200,137,58,0.16) 0%, transparent 70%);
+  top: -80px;
+  right: -60px;
+  pointer-events: none;
+}
+
+.ep-eyebrow {
+  font-size: 10.5px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 10px;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.ep-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.7rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 8px;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+}
+
+.ep-title em {
+  color: var(--amber-light);
+  font-style: italic;
+}
+
+.ep-subtitle {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 300;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Card ── */
+.ep-card {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+/* ── Section header inside card ── */
+.ep-section-label {
+  padding: 18px 28px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ep-section-title {
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--amber);
+  font-weight: 500;
+}
+
+.ep-section-hint {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ── Preference row ── */
+.ep-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  gap: 16px;
+  transition: background 0.18s;
+}
+
+.ep-row:last-of-type {
+  border-bottom: none;
+}
+
+.ep-row:hover {
+  background: rgba(200,137,58,0.03);
+}
+
+.ep-row-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ep-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  background: var(--parchment);
+  border: 1px solid var(--amber-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.ep-row:hover .ep-icon-wrap {
+  background: var(--amber-glow);
+}
+
+.ep-row-info {
+  min-width: 0;
+}
+
+.ep-row-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+
+.ep-row-desc {
+  font-size: 12.5px;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+/* ── Toggle ── */
+.ep-toggle {
+  position: relative;
+  width: 46px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.ep-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.ep-toggle-track {
+  position: absolute;
+  inset: 0;
+  background: #e2dbd0;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+
+.ep-toggle-track::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+  top: 3px;
+  left: 3px;
+  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+
+.ep-toggle input:checked + .ep-toggle-track {
+  background: var(--amber);
+}
+
+.ep-toggle input:checked + .ep-toggle-track::before {
+  transform: translateX(20px);
+}
+
+.ep-toggle input:focus-visible + .ep-toggle-track {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* ── Footer ── */
+.ep-footer {
+  padding: 22px 28px;
+  background: var(--warm-white);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Unsubscribe section */
+.ep-unsub {
+  padding: 20px 28px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: var(--c-danger-bg);
+}
+
+.ep-unsub-info {}
+
+.ep-unsub-label {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--c-danger);
+  margin-bottom: 2px;
+}
+
+.ep-unsub-desc {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.btn-unsub {
+  padding: 8px 20px;
+  border-radius: 50px;
+  background: transparent;
+  border: 1.5px solid var(--c-danger-border);
+  color: var(--c-danger);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-unsub:hover {
+  background: var(--c-danger);
+  border-color: var(--c-danger);
+  color: #fff;
+}
+
+/* ── Save button ── */
+.btn-save {
+  padding: 11px 32px;
+  border-radius: 50px;
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.btn-save:hover:not(:disabled) {
+  background: var(--amber);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(200,137,58,0.35);
+}
+
+.btn-save:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-save-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Status toast ── */
+.ep-toast {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: 50px;
+  animation: toastIn 0.3s ease;
+}
+
+.ep-toast-success {
+  background: rgba(22,163,74,0.1);
+  color: #16a34a;
+  border: 1px solid rgba(22,163,74,0.2);
+}
+
+.ep-toast-error {
+  background: var(--c-danger-bg);
+  color: var(--c-danger);
+  border: 1px solid var(--c-danger-border);
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Loading ── */
+.ep-loading {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.ep-loader-ring {
+  width: 44px;
+  height: 44px;
+  border: 3px solid var(--parchment);
+  border-top-color: var(--amber);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+.ep-loading-text {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .ep-page { padding: 24px 12px 60px; }
+  .ep-header { padding: 28px 24px; }
+  .ep-row { padding: 16px 20px; }
+  .ep-footer { padding: 18px 20px; }
+  .ep-unsub { padding: 16px 20px; }
+  .ep-section-label { padding: 14px 20px 12px; }
+}

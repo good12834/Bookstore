@@ -1,0 +1,386 @@
+/* ============================================
+   LUXURY BOOKSTORE — REGISTER PAGE
+   Ink / Parchment / Amber · Playfair + DM Sans
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --ink: #0d0d0d;
+  --parchment: #f5f0e8;
+  --warm-white: #faf8f4;
+  --amber: #c8893a;
+  --amber-light: #e8a84e;
+  --amber-glow: rgba(200, 137, 58, 0.14);
+  --muted: #6b6560;
+  --border: rgba(200, 137, 58, 0.22);
+  --border-input: #e2dbd0;
+  --shadow-card: 0 24px 64px rgba(0, 0, 0, 0.12);
+  --radius: 16px;
+}
+
+/* ── Full-page layout ── */
+.register-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Left panel (visual) ── */
+.register-visual {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.register-visual-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=900&auto=format&fit=crop&q=80');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.35;
+}
+
+.register-visual-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(13, 13, 13, 0.55) 0%,
+    rgba(13, 13, 13, 0.85) 100%
+  );
+}
+
+.register-visual-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px;
+}
+
+.register-visual-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.register-visual-brand .brand-accent {
+  color: var(--amber);
+  font-style: italic;
+}
+
+.register-visual-brand .brand-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--amber);
+  margin: 0 1px 7px;
+  display: inline-block;
+}
+
+.register-visual-body {
+  max-width: 380px;
+}
+
+.register-visual-eyebrow {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 14px;
+}
+
+.register-visual-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+
+.register-visual-heading em {
+  color: var(--amber-light);
+  font-style: italic;
+}
+
+.register-visual-desc {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.register-visual-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.register-visual-divider {
+  width: 32px;
+  height: 1px;
+  background: rgba(200, 137, 58, 0.4);
+}
+
+.register-visual-tagline {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.5px;
+}
+
+/* ── Right panel (form) ── */
+.register-form-panel {
+  background: var(--warm-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 32px;
+  overflow-y: auto;
+}
+
+.register-form-inner {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Mobile brand (hidden on desktop) */
+.register-mobile-brand {
+  display: none;
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  margin-bottom: 36px;
+  align-items: center;
+  gap: 3px;
+}
+
+.register-mobile-brand .brand-accent {
+  color: var(--amber);
+  font-style: italic;
+}
+
+.register-mobile-brand .brand-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--amber);
+  margin: 0 1px 7px;
+  display: inline-block;
+}
+
+/* Form headings */
+.register-form-eyebrow {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 10px;
+}
+
+.register-form-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.register-form-subtitle {
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 36px;
+  line-height: 1.6;
+}
+
+/* Error banner */
+.register-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  font-size: 13.5px;
+  color: #b91c1c;
+  animation: slideDown 0.25s ease;
+}
+
+.register-error i {
+  font-size: 15px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Form fields */
+.field-group {
+  margin-bottom: 20px;
+}
+
+.field-label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: 0.2px;
+}
+
+.field-input-wrap {
+  position: relative;
+}
+
+.field-input-wrap i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #b8b0a8;
+  font-size: 15px;
+  pointer-events: none;
+  transition: color 0.2s;
+}
+
+/* Field input styling (used by Register) */
+.field-input {
+  width: 100%;
+  padding: 12px 14px 12px 42px;
+  border: 1.5px solid var(--border-input);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14.5px;
+  color: var(--ink);
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field-input:focus,
+.field-input-wrap:focus-within .field-input {
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px var(--amber-glow);
+}
+
+.field-input-wrap:focus-within i {
+  color: var(--amber);
+}
+
+.field-input::placeholder {
+  color: #c4bdb6;
+}
+
+/* Password toggle */
+.field-input-wrap .pw-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #b8b0a8;
+  cursor: pointer;
+  padding: 0;
+  font-size: 15px;
+  transition: color 0.2s;
+  left: auto;
+  pointer-events: auto;
+}
+
+.field-input-wrap .pw-toggle:hover {
+  color: var(--amber);
+}
+
+.field-input.has-pw-toggle {
+  padding-right: 42px;
+}
+
+/* Submit button */
+.btn-register {
+  width: 100%;
+  padding: 13px;
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: 0.2px;
+  margin-bottom: 24px;
+}
+
+.btn-register:hover:not(:disabled) {
+  background: var(--amber);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(200, 137, 58, 0.35);
+}
+
+.btn-register:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Login prompt */
+.register-form-panel .register-login-prompt {
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.register-form-panel .register-login-prompt a {
+  color: var(--amber);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.register-form-panel .register-login-prompt a:hover {
+  color: var(--amber-light);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .register-page {
+    grid-template-columns: 1fr;
+  }
+
+  .register-visual {
+    display: none;
+  }
+
+  .register-form-panel {
+    min-height: 100vh;
+    padding: 48px 24px;
+  }
+
+  .register-mobile-brand {
+    display: inline-flex;
+  }
+}
