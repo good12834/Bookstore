@@ -21,6 +21,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+// Serve static files from the client build directory
+const clientBuildPath = path.join(__dirname, "..", "client", "dist");
+app.use(express.static(clientBuildPath));
+
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/books", require("./routes/bookRoutes"));
 app.use("/api/orders", require("./routes/orderRoutes"));
@@ -45,13 +49,11 @@ const connectDB = async () => {
 
 connectDB();
 
-app.get("/", (req, res) => {
-  res.send("API is running...");
-});
-
-// Health check endpoint for Navbar status indicator
-app.get("/health", (req, res) => {
-  res.status(200).json({ status: "online" });
+// Serve index.html for any non-API routes (client-side routing)
+app.get("*", (req, res) => {
+  if (!req.path.startsWith("/api/")) {
+    res.sendFile(path.join(clientBuildPath, "index.html"));
+  }
 });
 
 app.listen(PORT, () => {
