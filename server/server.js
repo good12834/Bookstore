@@ -50,7 +50,7 @@ const connectDB = async () => {
 connectDB();
 
 // Serve index.html for any non-API routes (client-side routing)
-app.get("*", (req, res) => {
+app.use((req, res) => {
   if (!req.path.startsWith("/api/")) {
     res.sendFile(path.join(clientBuildPath, "index.html"));
   }
