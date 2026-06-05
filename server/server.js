@@ -34,17 +34,49 @@ app.use("/api/upload", require("./routes/uploadRoutes"));
 app.use("/api/email", require("./routes/emailRoutes"));
 app.use("/api/wishlist", require("./routes/wishlistRoutes"));
 
-// Teat DB Connection
-const connectDB = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log("Database connected successfully.");
-    // Sync models
-    await sequelize.sync({ alter: true });
-    console.log("Models synced.");
-  } catch (error) {
-    console.error("Unable to connect to the database:", error);
+// Health check endpoint
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+// Retry logic for database connection
+const connectDB = async (retries = 5, delay = 3000) => {
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      console.log(
+        `Database connection attempt ${attempt}/${retries}...`
+      );
+      await sequelize.authenticate();
+      console.log("✅ Database connected successfully.");
+
+      // Sync models - use alter:false on subsequent runs to avoid index conflicts
+      // Use force:false to never drop tables
+      await sequelize.sync({ alter: false });
+      console.log("✅ Models synced.");
+      return true;
+    } catch (error) {
+      console.error(
+        `❌ Database connection attempt ${attempt} failed:`,
+        error.message
+      );
+
+      if (attempt === retries) {
+        console.error(
+          "⚠️  Could not connect to database after all retries."
+        );
+        console.error(
+          "Please check your DB_HOST, DB_USER, DB_PASS, and DB_NAME environment variables."
+        );
+        // Don't crash the process - let the server start and health check work
+        // Routes that need DB will fail, but health check will respond
+        return false;
+      }
+
+      console.log(`Retrying in ${delay / 1000} seconds...`);
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    }
   }
+  return false;
 };
 
 connectDB();
@@ -57,5 +89,5 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
