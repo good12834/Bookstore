@@ -104,41 +104,51 @@ const Book = sequelize.define("Book", {
 
 // Add unique constraints manually to avoid duplicate index creation
 Book.beforeSync(async () => {
-  const queryInterface = sequelize.getQueryInterface();
+  try {
+    const queryInterface = sequelize.getQueryInterface();
 
-  // Check if indexes already exist before creating them
-  const [indexes] = await queryInterface.sequelize.query(
-    'SHOW INDEXES FROM Books WHERE Column_name IN ("googleBooksId", "gutendexId", "openLibraryId")'
-  );
+    // Check if the Books table exists first
+    const [tables] = await queryInterface.sequelize.query(
+      "SHOW TABLES LIKE 'Books'"
+    );
+    if (tables.length === 0) return; // Table doesn't exist yet, nothing to migrate
 
-  const existingIndexes = {};
-  indexes.forEach((index) => {
-    existingIndexes[index.Column_name] = true;
-  });
+    // Check if indexes already exist before creating them
+    const [indexes] = await queryInterface.sequelize.query(
+      'SHOW INDEXES FROM Books WHERE Column_name IN ("googleBooksId", "gutendexId", "openLibraryId")'
+    );
 
-  // Only add unique constraints if they don't already exist
-  if (!existingIndexes.googleBooksId) {
-    await queryInterface.addConstraint("Books", {
-      fields: ["googleBooksId"],
-      type: "unique",
-      name: "googleBooksId",
+    const existingIndexes = {};
+    indexes.forEach((index) => {
+      existingIndexes[index.Column_name] = true;
     });
-  }
 
-  if (!existingIndexes.gutendexId) {
-    await queryInterface.addConstraint("Books", {
-      fields: ["gutendexId"],
-      type: "unique",
-      name: "gutendexId",
-    });
-  }
+    // Only add unique constraints if they don't already exist
+    if (!existingIndexes.googleBooksId) {
+      await queryInterface.addConstraint("Books", {
+        fields: ["googleBooksId"],
+        type: "unique",
+        name: "googleBooksId",
+      });
+    }
 
-  if (!existingIndexes.openLibraryId) {
-    await queryInterface.addConstraint("Books", {
-      fields: ["openLibraryId"],
-      type: "unique",
-      name: "openLibraryId",
-    });
+    if (!existingIndexes.gutendexId) {
+      await queryInterface.addConstraint("Books", {
+        fields: ["gutendexId"],
+        type: "unique",
+        name: "gutendexId",
+      });
+    }
+
+    if (!existingIndexes.openLibraryId) {
+      await queryInterface.addConstraint("Books", {
+        fields: ["openLibraryId"],
+        type: "unique",
+        name: "openLibraryId",
+      });
+    }
+  } catch (error) {
+    console.log("Note: Skipping index migration -", error.message);
   }
 });
 
