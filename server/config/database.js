@@ -42,4 +42,11 @@ if (dialect === 'postgres' || dialect === 'postgresql') {
 }
 
 module.exports = sequelize;
-module.exports.dialect = dialect;
+// Expose the configured dialect *name* (string) on a non-conflicting property.
+// NOTE: do NOT assign to `sequelize.dialect` directly — Sequelize uses that
+// property internally to hold the dialect *object* (with `queryGenerator`,
+// `queryInterface`, `connectionManager`, etc.). Overwriting it with a string
+// breaks `sequelize.authenticate()` and any other internal dialect lookups,
+// producing errors like "Cannot read properties of undefined (reading
+// 'authTestQuery')".
+module.exports.dialectName = dialect;
